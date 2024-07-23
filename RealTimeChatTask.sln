@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{56112F66-1189-4D2F-9953-D2F38B87D214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeChatTask.DAL", "source\RealTimeChatTask.DAL\RealTimeChatTask.DAL.csproj", "{E5871132-D50C-4B51-BEA2-8F171F0E947E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeChatTask.BLL", "source\RealTimeChatTask.BLL\RealTimeChatTask.BLL.csproj", "{92877CA4-E044-4DFA-A85A-AACBE63377D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeChatTask.PL", "source\RealTimeChatTask.PL\RealTimeChatTask.PL.csproj", "{188B06BA-B338-4B24-A19F-795BDF266E38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeChatTask.Blazor", "source\RealTimeChatTask.Blazor\RealTimeChatTask.Blazor.csproj", "{30542B8B-C98F-4269-8185-16BA13A5D8D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5871132-D50C-4B51-BEA2-8F171F0E947E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5871132-D50C-4B51-BEA2-8F171F0E947E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5871132-D50C-4B51-BEA2-8F171F0E947E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5871132-D50C-4B51-BEA2-8F171F0E947E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92877CA4-E044-4DFA-A85A-AACBE63377D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92877CA4-E044-4DFA-A85A-AACBE63377D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92877CA4-E044-4DFA-A85A-AACBE63377D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92877CA4-E044-4DFA-A85A-AACBE63377D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188B06BA-B338-4B24-A19F-795BDF266E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188B06BA-B338-4B24-A19F-795BDF266E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188B06BA-B338-4B24-A19F-795BDF266E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188B06BA-B338-4B24-A19F-795BDF266E38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30542B8B-C98F-4269-8185-16BA13A5D8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30542B8B-C98F-4269-8185-16BA13A5D8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30542B8B-C98F-4269-8185-16BA13A5D8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30542B8B-C98F-4269-8185-16BA13A5D8D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5871132-D50C-4B51-BEA2-8F171F0E947E} = {56112F66-1189-4D2F-9953-D2F38B87D214}
+		{92877CA4-E044-4DFA-A85A-AACBE63377D4} = {56112F66-1189-4D2F-9953-D2F38B87D214}
+		{188B06BA-B338-4B24-A19F-795BDF266E38} = {56112F66-1189-4D2F-9953-D2F38B87D214}
+		{30542B8B-C98F-4269-8185-16BA13A5D8D1} = {56112F66-1189-4D2F-9953-D2F38B87D214}
+	EndGlobalSection
+EndGlobal
