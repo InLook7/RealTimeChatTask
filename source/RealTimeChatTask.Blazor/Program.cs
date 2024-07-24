@@ -3,20 +3,20 @@ using RealTimeChatTask.Blazor.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
-
+	.AddInteractiveServerComponents();
+	
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    app.UseHsts();
+	app.UseExceptionHandler("/Error", createScopeForErrors: true);
+	app.UseHsts();
 }
 
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+	.AddInteractiveServerRenderMode();
 
 app.Run();
