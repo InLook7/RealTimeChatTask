@@ -1,5 +1,6 @@
 @page "/"
-@rendermode InteractiveServer
+@implements IAsyncDisposable
+@inject IChatService _chatService;
 
 <div class="chat">
     <div class="chat-left-side">
@@ -56,20 +57,50 @@
         </div>
 
         <div class="chat-body">
-            <div class="chat-body-message">
-                <span>Hello</span>
-                <span>10.10.2000</span>
-            </div>
-
-            <div class="chat-body-message own">
-                <span>Bye</span>
-                <span>10.10.2000</span>
-            </div>
+            @foreach (var message in _messages)
+            {
+                <div class="chat-body-message">
+                    <span>@message</span>
+                    <span>10.10.2000</span>
+                </div>
+            }
         </div>
 
         <div class="chat-sender">
-            <input class="sender-input" type="text" placeholder="Enter a message"/>
-            <div class="sender-button">Send</div>
+            <input class="sender-input" @bind="_message" type="text" placeholder="Enter a message"/>
+            <div class="sender-button" @onclick="SendMessageAsync">Send</div>
         </div>
     </div>
 </div>
+
+@code 
+{
+    private List<string> _messages = new List<string>();
+    private string _message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _chatService.OnReceiveMessage(HandleReceivedMessage);
+        await _chatService.StartAsync();
+        await _chatService.JoinChat();
+
+        _messages.Add("Hello");
+        _messages.Add("Bye");
+    }
+
+    private void HandleReceivedMessage(string receivedMessage)
+    {
+        _messages.Add(_message);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task SendMessageAsync()
+    {
+        await _chatService.SendMessageAsync(_message);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _chatService.CloseAsync();
+    }
+}
