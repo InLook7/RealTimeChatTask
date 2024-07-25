@@ -1,6 +1,6 @@
 namespace RealTimeChatTask.Blazor.Interfaces;
 
-public interface IChatService
+public interface IChatHubService
 {
     void OnReceiveMessage(Action<string> handler);
     Task StartAsync();

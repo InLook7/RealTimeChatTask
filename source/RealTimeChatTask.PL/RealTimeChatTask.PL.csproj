@@ -4,11 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RealTimeChatTask.BLL\RealTimeChatTask.BLL.csproj"/>
+    <ProjectReference Include="..\RealTimeChatTask.SharedModels\RealTimeChatTask.SharedModels.csproj"/>
   </ItemGroup>
 
 </Project>

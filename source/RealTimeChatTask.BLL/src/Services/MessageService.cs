@@ -30,6 +30,14 @@ public class MessageService : IMessageService
         
         return _mapper.Map<MessageDTO>(message);
     }
+
+    public async Task<IEnumerable<MessageDTO>> GetByRoomIdAsync(int roomId)
+    {
+        var messages = await _unitOfWork.MessageRepository.GetAllAsync();
+        messages = messages.Where(m => m.ChatRoomId == roomId);
+
+        return _mapper.Map<IEnumerable<MessageDTO>>(messages);
+    }
     
     public async Task<MessageDTO> AddAsync(MessageDTO dto)
     {

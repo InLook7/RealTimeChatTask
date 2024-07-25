@@ -3,11 +3,11 @@ using RealTimeChatTask.Blazor.Interfaces;
 
 namespace RealTimeChatTask.Blazor.Services;
 
-public class ChatService : IChatService
+public class ChatHubService : IChatHubService
 {
     private readonly HubConnection _hubConnection;
 
-    public ChatService(HubConnection hubConnection)
+    public ChatHubService(HubConnection hubConnection)
     {
         _hubConnection = hubConnection;
     }
