@@ -4,8 +4,8 @@ namespace RealTimeChatTask.DAL.Interfaces;
 
 public interface IUnitOfWork
 {
-	IChatRoomRepository ChatRoomRepository { get; }
-	IMessageRepository MessageRepository { get; }
-	
-	Task SaveAsync();
+    IChatRoomRepository ChatRoomRepository { get; }
+    IMessageRepository MessageRepository { get; }
+    
+    Task SaveAsync();
 }

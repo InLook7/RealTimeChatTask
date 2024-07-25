@@ -6,29 +6,29 @@ using RealTimeChatTask.Blazor.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
-	.AddInteractiveServerComponents();
+    .AddInteractiveServerComponents();
 
 builder.Services.AddTransient<IChatService, ChatService>();
 
 builder.Services.AddSingleton(serviceProvider =>
 {
-	return new HubConnectionBuilder()
-		.WithUrl("http://localhost:12000/chat")
-		.Build();
+    return new HubConnectionBuilder()
+        .WithUrl("http://localhost:12000/chat")
+        .Build();
 });
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Error", createScopeForErrors: true);
-	app.UseHsts();
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseHsts();
 }
 
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-	.AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode();
 
 app.Run();
