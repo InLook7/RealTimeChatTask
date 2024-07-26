@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using FluentValidation;
 using AutoMapper;
 using RealTimeChatTask.BLL.DTOs;
 using RealTimeChatTask.BLL.Interfaces;
@@ -26,8 +27,15 @@ public class ChatHub : Hub
     {
         var messageDTO = _mapper.Map<MessageDTO>(messageModel);
 
-        var message = await _messageService.AddAsync(messageDTO);
+        try
+        {
+            var message = await _messageService.AddAsync(messageDTO);
 
-        await Clients.Group(group).SendAsync("ReceiveMessage", _mapper.Map<MessageModel>(message));
+            await Clients.Group(group).SendAsync("ReceiveMessage", _mapper.Map<MessageModel>(message));
+        }
+        catch(ValidationException)
+        {
+            await Clients.Caller.SendAsync("ReceiveError", "Your message must not contain more than one hundred characters.", messageModel.Content);
+        }
     }
 }

@@ -8,13 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddTransient<IChatHubService, ChatHubService>();
+builder.Services.AddTransient<IChatApiService, ChatApiService>();
+
 builder.Services.AddSingleton(serviceProdiver => new HttpClient
 {
     BaseAddress = builder.Configuration.GetValue<Uri>("AppBackendUrl"),
 });
-
-builder.Services.AddTransient<IChatHubService, ChatHubService>();
-builder.Services.AddTransient<IChatApiService, ChatApiService>();
 
 builder.Services.AddSingleton(serviceProvider =>
     new HubConnectionBuilder()

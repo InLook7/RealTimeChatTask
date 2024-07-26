@@ -54,6 +54,11 @@
             <input class="sender-input" @bind="_message.Content" type="text" placeholder="Enter a message"/>
             <div class="sender-button" @onclick="SendMessageAsync">Send</div>
         </div>
+
+
+        <div class="chat-error">
+             @_error
+        </div>
     </div>
 </div>
 
@@ -63,6 +68,7 @@
     private List<MessageModel> _messages = new List<MessageModel>();
     private List<ChatRoomModel> _rooms = new List<ChatRoomModel>();
     private ChatRoomModel _chat;
+    private string _error;
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,6 +76,8 @@
         SelectRoom(_rooms[0]);
 
         _chatHubService.OnReceiveMessage(HandleReceivedMessage);
+        _chatHubService.OnReceiveError(HandleReceivedError);
+
         await _chatHubService.StartAsync();
         await _chatHubService.JoinChat();
     }
@@ -84,6 +92,13 @@
     private void HandleReceivedMessage(MessageModel receivedMessage)
     {
         _messages.Add(receivedMessage);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleReceivedError(string errorMessage, string content)
+    {
+        _error = errorMessage;
+        _message.Content = content;
         InvokeAsync(StateHasChanged);
     }
 

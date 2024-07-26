@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using RealTimeChatTask.BLL.DTOs;
 using RealTimeChatTask.BLL.Interfaces;
 using RealTimeChatTask.DAL.Entities;
@@ -10,11 +11,13 @@ public class MessageService : IMessageService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IValidator<MessageDTO> _validator;
     
-    public MessageService(IUnitOfWork unitOfWork, IMapper mapper)
+    public MessageService(IUnitOfWork unitOfWork, IMapper mapper, IValidator<MessageDTO> validator)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _validator = validator;
     }
     
     public async Task<IEnumerable<MessageDTO>> GetAllAsync()
@@ -41,6 +44,7 @@ public class MessageService : IMessageService
     
     public async Task<MessageDTO> AddAsync(MessageDTO dto)
     {
+        await _validator.ValidateAndThrowAsync(dto);
         var message = _mapper.Map<Message>(dto);
         
         message = await _unitOfWork.MessageRepository.AddAsync(message);

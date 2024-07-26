@@ -16,7 +16,12 @@ public class ChatHubService : IChatHubService
     public void OnReceiveMessage(Action<MessageModel> handler)
     {
         _hubConnection.On("ReceiveMessage", handler);
-    }   
+    }  
+
+    public void OnReceiveError(Action<string, string> handler)
+    {
+        _hubConnection.On("ReceiveError", handler);
+    } 
     
     public async Task StartAsync()
     {

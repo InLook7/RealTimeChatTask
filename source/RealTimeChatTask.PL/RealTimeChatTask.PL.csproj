@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RealTimeChatTask.BLL\RealTimeChatTask.BLL.csproj"/>
-    <ProjectReference Include="..\RealTimeChatTask.SharedModels\RealTimeChatTask.SharedModels.csproj"/>
+    <ProjectReference Include="..\RealTimeChatTask.BLL\RealTimeChatTask.BLL.csproj" />
+    <ProjectReference Include="..\RealTimeChatTask.SharedModels\RealTimeChatTask.SharedModels.csproj" />
   </ItemGroup>
 
 </Project>

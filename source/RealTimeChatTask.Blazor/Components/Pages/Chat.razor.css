@@ -58,7 +58,7 @@
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: grid;
-    grid-template-rows: 14vh 60vh 13vh;
+    grid-template-rows: 14vh 59vh 13vh;
 }
 
 .chat-header {
@@ -138,4 +138,11 @@
   
 .sender-button:hover {
     background: linear-gradient(98.63deg, #5ac441 0%, #398e2b 100%);
+}
+
+.chat-error {
+    margin-top: -60px;
+    margin-left: 20px;
+    color: #b74550;
+    line-height: 1.5;
 }
