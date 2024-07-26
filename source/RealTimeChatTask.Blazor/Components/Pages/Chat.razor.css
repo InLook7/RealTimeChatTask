@@ -51,13 +51,12 @@
 }
 
 .chat-right-side {
-    display: flex;
+    display: grid;
     flex-direction: column;
     gap: 1rem;
     background: whitesmoke;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: grid;
     grid-template-rows: 14vh 59vh 13vh;
 }
 
@@ -145,4 +144,22 @@
     margin-left: 20px;
     color: #b74550;
     line-height: 1.5;
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 11px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.chat-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

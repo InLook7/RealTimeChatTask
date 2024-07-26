@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.SignalR;
 using FluentValidation;
 using AutoMapper;
+using RealTimeChatTask.PL.Interfaces;
 using RealTimeChatTask.BLL.DTOs;
 using RealTimeChatTask.BLL.Interfaces;
 using RealTimeChatTask.SharedModels.Models;
 
 namespace RealTimeChatTask.PL.Hubs;
 
-public class ChatHub : Hub
+public class ChatHub : Hub<IChatClient>
 {
     private readonly IMessageService _messageService;
     private readonly IMapper _mapper;
@@ -18,12 +19,12 @@ public class ChatHub : Hub
         _mapper = mapper;
     } 
 
-    public async Task JoinChat(string group)
+    public async Task JoinChat(ChatRoomModel room)
     {
-        await Groups.AddToGroupAsync(Context.ConnectionId, group);
+        await Groups.AddToGroupAsync(Context.ConnectionId, room.Name);
     }
-    
-    public async Task SendMessage(string group, MessageModel messageModel)
+
+    public async Task SendMessage(ChatRoomModel room, MessageModel messageModel)
     {
         var messageDTO = _mapper.Map<MessageDTO>(messageModel);
 
@@ -31,11 +32,11 @@ public class ChatHub : Hub
         {
             var message = await _messageService.AddAsync(messageDTO);
 
-            await Clients.Group(group).SendAsync("ReceiveMessage", _mapper.Map<MessageModel>(message));
+            await Clients.Group(room.Name).ReceiveMessage(_mapper.Map<MessageModel>(message));
         }
         catch(ValidationException)
         {
-            await Clients.Caller.SendAsync("ReceiveError", "Your message must not contain more than one hundred characters.", messageModel.Content);
+            await Clients.Caller.ReceiveError("Your message must not contain more than one hundred characters.", messageModel.Content);
         }
     }
 }

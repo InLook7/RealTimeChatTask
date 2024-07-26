@@ -21,8 +21,13 @@ public class ChatHubService : IChatHubService
     public void OnReceiveError(Action<string, string> handler)
     {
         _hubConnection.On("ReceiveError", handler);
-    } 
-    
+    }
+
+    public bool IsConnected()
+    {
+        return _hubConnection.State == HubConnectionState.Connected;
+    }
+
     public async Task StartAsync()
     {
         if (_hubConnection.State == HubConnectionState.Disconnected)
@@ -39,16 +44,16 @@ public class ChatHubService : IChatHubService
         }
     }
     
-    public async Task JoinChat()
+    public async Task JoinChat(ChatRoomModel room)
     {
-        await _hubConnection.SendAsync("JoinChat", "music");
+        await _hubConnection.SendAsync("JoinChat", room);
     }
     
-    public async Task SendMessageAsync(MessageModel message)
+    public async Task SendMessageAsync(ChatRoomModel room, MessageModel message)
     {
         if (!string.IsNullOrEmpty(message.Content))
         {
-            await _hubConnection.SendAsync("SendMessage", "music", message);
+            await _hubConnection.SendAsync("SendMessage", room, message);
         }
     }
 }

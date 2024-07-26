@@ -45,7 +45,7 @@
             {
                 <div class="chat-body-message">
                     <span>@message.Content</span>
-                    <span>@message.CreationDate</span>
+                    <span>@message.CreationDate.ToString("HH:mm")</span>
                 </div>
             }
         </div>
@@ -69,29 +69,36 @@
     private List<ChatRoomModel> _rooms = new List<ChatRoomModel>();
     private ChatRoomModel _chat;
     private string _error;
+    private ElementReference chatBodyElement;
 
     protected override async Task OnInitializedAsync()
     {
         _rooms = await _chatApiService.GetAllRooms();
-        SelectRoom(_rooms[0]);
 
         _chatHubService.OnReceiveMessage(HandleReceivedMessage);
         _chatHubService.OnReceiveError(HandleReceivedError);
 
-        await _chatHubService.StartAsync();
-        await _chatHubService.JoinChat();
+        await SelectRoom(_rooms[0]);
     }
 
-    private async void SelectRoom(ChatRoomModel chatRoomModel)
+    private async Task SelectRoom(ChatRoomModel chatRoomModel)
     {
+        if(_chatHubService.IsConnected())
+            await _chatHubService.CloseAsync();
+        
+        await _chatHubService.StartAsync();
+        await _chatHubService.JoinChat(chatRoomModel);
+
         _chat = chatRoomModel;
         _messages = await _chatApiService.GetMessagesByRoom(chatRoomModel.Id);
+
         await InvokeAsync(StateHasChanged);
     }
 
     private void HandleReceivedMessage(MessageModel receivedMessage)
     {
         _messages.Add(receivedMessage);
+
         InvokeAsync(StateHasChanged);
     }
 
@@ -99,6 +106,7 @@
     {
         _error = errorMessage;
         _message.Content = content;
+
         InvokeAsync(StateHasChanged);
     }
 
@@ -106,7 +114,7 @@
     {
         _message.ChatRoomId = _chat.Id;
         _message.CreationDate = DateTime.UtcNow;
-        await _chatHubService.SendMessageAsync(_message);
+        await _chatHubService.SendMessageAsync(_chat, _message);
 
         _message.Content = string.Empty;
     }

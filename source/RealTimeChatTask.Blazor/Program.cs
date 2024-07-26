@@ -16,7 +16,7 @@ builder.Services.AddSingleton(serviceProdiver => new HttpClient
     BaseAddress = builder.Configuration.GetValue<Uri>("AppBackendUrl"),
 });
 
-builder.Services.AddSingleton(serviceProvider =>
+builder.Services.AddScoped(serviceProvider =>
     new HubConnectionBuilder()
         .WithUrl("http://localhost:12000/chat")
         .Build()
