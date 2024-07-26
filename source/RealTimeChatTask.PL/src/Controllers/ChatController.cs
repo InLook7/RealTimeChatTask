@@ -1,5 +1,5 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 using RealTimeChatTask.BLL.Interfaces;
 using RealTimeChatTask.SharedModels.Models;
 

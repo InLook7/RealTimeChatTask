@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using RealTimeChatTask.Blazor.Interfaces;
+using RealTimeChatTask.SharedModels.Models;
 
 namespace RealTimeChatTask.Blazor.Services;
 
@@ -12,7 +13,7 @@ public class ChatHubService : IChatHubService
         _hubConnection = hubConnection;
     }
     
-    public void OnReceiveMessage(Action<string> handler)
+    public void OnReceiveMessage(Action<MessageModel> handler)
     {
         _hubConnection.On("ReceiveMessage", handler);
     }   
@@ -38,9 +39,9 @@ public class ChatHubService : IChatHubService
         await _hubConnection.SendAsync("JoinChat", "music");
     }
     
-    public async Task SendMessageAsync(string message)
+    public async Task SendMessageAsync(MessageModel message)
     {
-        if (!string.IsNullOrEmpty(message))
+        if (!string.IsNullOrEmpty(message.Content))
         {
             await _hubConnection.SendAsync("SendMessage", "music", message);
         }

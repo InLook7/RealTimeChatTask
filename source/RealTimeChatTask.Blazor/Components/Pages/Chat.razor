@@ -27,17 +27,17 @@
     <div class="chat-right-side">
         @if (_chat != null)
         {
-        <div class="chat-header">
-            <div class="chat-header-title">
-                <img class="element-image" src=@($"images/{_chat.Name}.png") alt=@_chat.Name/>
+            <div class="chat-header">
+                <div class="chat-header-title">
+                    <img class="element-image" src=@($"images/{_chat.Name}.png") alt=@_chat.Name/>
 
-                <div class="element-name">
-                    <span>@_chat.Name</span>
+                    <div class="element-name">
+                        <span>@_chat.Name</span>
+                    </div>
                 </div>
-            </div>
 
-            <hr class="chat-header-line"/>
-        </div>
+                <hr class="chat-header-line"/>
+            </div>
         }
 
         <div class="chat-body">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="chat-sender">
-            <input class="sender-input" @bind="_message" type="text" placeholder="Enter a message"/>
+            <input class="sender-input" @bind="_message.Content" type="text" placeholder="Enter a message"/>
             <div class="sender-button" @onclick="SendMessageAsync">Send</div>
         </div>
     </div>
@@ -59,9 +59,9 @@
 
 @code 
 {
-    private List<ChatRoomModel> _rooms = new List<ChatRoomModel>();
+    private MessageModel _message = new MessageModel();
     private List<MessageModel> _messages = new List<MessageModel>();
-    private string _message;
+    private List<ChatRoomModel> _rooms = new List<ChatRoomModel>();
     private ChatRoomModel _chat;
 
     protected override async Task OnInitializedAsync()
@@ -81,15 +81,19 @@
         await InvokeAsync(StateHasChanged);
     }
 
-    private void HandleReceivedMessage(string receivedMessage)
+    private void HandleReceivedMessage(MessageModel receivedMessage)
     {
-        //_messages.Add(_message);
+        _messages.Add(receivedMessage);
         InvokeAsync(StateHasChanged);
     }
 
     private async Task SendMessageAsync()
     {
+        _message.ChatRoomId = _chat.Id;
+        _message.CreationDate = DateTime.UtcNow;
         await _chatHubService.SendMessageAsync(_message);
+
+        _message.Content = string.Empty;
     }
 
     public async ValueTask DisposeAsync()

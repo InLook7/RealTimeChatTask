@@ -1,10 +1,12 @@
+using RealTimeChatTask.SharedModels.Models;
+
 namespace RealTimeChatTask.Blazor.Interfaces;
 
 public interface IChatHubService
 {
-    void OnReceiveMessage(Action<string> handler);
+    void OnReceiveMessage(Action<MessageModel> handler);
     Task StartAsync();
     Task CloseAsync();
     Task JoinChat();
-    Task SendMessageAsync(string message);
+    Task SendMessageAsync(MessageModel message);
 }
