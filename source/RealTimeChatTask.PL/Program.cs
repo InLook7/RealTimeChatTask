@@ -35,8 +35,8 @@ builder.Services.AddScoped<IValidator<MessageDTO>, MessageValidator>();
 builder.Services.AddAutoMapper(typeof(BusinessLayerMapper), typeof(PresentationLayerMapper));
 
 builder.Services.AddSingleton(new TextAnalyticsClient(
-    new Uri("{hidden}"), 
-    new AzureKeyCredential("{hidden}")
+    new Uri(builder.Configuration.GetValue<string>("TextAnalytics:Endpoint")), 
+    new AzureKeyCredential(builder.Configuration.GetValue<string>("TextAnalytics:ApiKey"))
 ));
 
 var app = builder.Build();
