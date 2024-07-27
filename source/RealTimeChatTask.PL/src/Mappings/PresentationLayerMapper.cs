@@ -13,5 +13,8 @@ public class PresentationLayerMapper : Profile
 
         CreateMap<MessageDTO, MessageModel>()
             .ReverseMap();
+
+        CreateMap<UserDTO, UserModel>()
+            .ReverseMap();
     }
 }

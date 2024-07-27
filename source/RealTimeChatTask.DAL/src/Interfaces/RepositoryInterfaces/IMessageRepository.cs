@@ -4,7 +4,7 @@ namespace RealTimeChatTask.DAL.Interfaces.RepositoryInterfaces;
 
 public interface IMessageRepository : IRepository<Message>
 {
-    Task<IEnumerable<Message>> GetAllByRoomWithSentimentsAsync(int roomId);
+    Task<IEnumerable<Message>> GetAllByRoomWithDetailsAsync(int roomId);
 
-    Task<Message> GetByIdWithSentimentsAsync(int id);
+    Task<Message> GetByIdWithDetailsAsync(int id);
 }

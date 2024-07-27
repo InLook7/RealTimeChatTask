@@ -29,14 +29,14 @@ public class MessageService : IMessageService
 
     public async Task<MessageDTO> GetByIdAsync(int id)
     {
-        var message = await _unitOfWork.MessageRepository.GetByIdWithSentimentsAsync(id);
+        var message = await _unitOfWork.MessageRepository.GetByIdWithDetailsAsync(id);
         
         return _mapper.Map<MessageDTO>(message);
     }
 
     public async Task<IEnumerable<MessageDTO>> GetByRoomAsync(int roomId)
     {
-        var messages = await _unitOfWork.MessageRepository.GetAllByRoomWithSentimentsAsync(roomId);
+        var messages = await _unitOfWork.MessageRepository.GetAllByRoomWithDetailsAsync(roomId);
 
         return _mapper.Map<IEnumerable<MessageDTO>>(messages);
     }

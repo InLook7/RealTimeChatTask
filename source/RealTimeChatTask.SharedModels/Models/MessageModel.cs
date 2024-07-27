@@ -7,6 +7,9 @@ public class MessageModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
+    [JsonPropertyName("userId")]
+    public int UserId { get; set; }
+
     [JsonPropertyName("chatRoomId")]
     public int ChatRoomId { get; set; }
 
@@ -18,4 +21,7 @@ public class MessageModel
 
     [JsonPropertyName("sentiment")]
     public string Sentiment { get; set; }
+
+    [JsonPropertyName("userName")]
+    public string UserName { get; set; }
 }

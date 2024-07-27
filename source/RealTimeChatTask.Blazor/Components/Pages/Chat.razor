@@ -6,6 +6,13 @@
 
 <div class="chat">
     <div class="chat-left-side">
+        <div class="chat-username">
+            <input class="chat-username-field" @bind="_userNameInput" type="text" placeholder="Enter your username"/>
+            <div class="sender-button" @onclick="UpdateUserNameAsync">Ok</div>
+        </div>
+
+        <hr class="chat-list-line"/>
+
         <h2>Topics</h2>
         
         <div class="chat-list">
@@ -43,7 +50,8 @@
         <div class="chat-body">
             @foreach (var message in _messages)
             {
-                <div class="chat-body-message @ColorMessage(message)">
+                <div class="chat-body-message @ColorMessage(message) @MoveMessageToRight(message)">
+                    <span class="message-username">@message.UserName</span>
                     <span class="message-content">@message.Content</span>
                     <span class="message-date">@message.CreationDate.ToString("HH:mm")</span>
                 </div>
@@ -68,8 +76,10 @@
     private List<MessageModel> _messages = new List<MessageModel>();
     private List<ChatRoomModel> _rooms = new List<ChatRoomModel>();
     private ChatRoomModel _chat;
+    private UserModel _user;
+    private bool _isUserAdded = false;
+    private string _userNameInput;
     private string _error;
-    private ElementReference chatBodyElement;
 
     protected override async Task OnInitializedAsync()
     {
@@ -79,6 +89,15 @@
         _chatHubService.OnReceiveError(HandleReceivedError);
 
         await SelectRoom(_rooms[0]);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_isUserAdded)
+        {
+            _user = await _chatApiService.AddUser(new UserModel() { UserName = "Anonim" });
+            _isUserAdded = true;
+        }
     }
 
     private async Task SelectRoom(ChatRoomModel chatRoomModel)
@@ -112,11 +131,21 @@
 
     private async Task SendMessageAsync()
     {
+        _message.UserId = _user.Id;
         _message.ChatRoomId = _chat.Id;
         _message.CreationDate = DateTime.UtcNow;
         await _chatHubService.SendMessageAsync(_chat, _message);
 
         _message.Content = string.Empty;
+    }
+
+    private async Task UpdateUserNameAsync()
+    {
+        if (!string.IsNullOrEmpty(_userNameInput))
+        {
+            _user.UserName = _userNameInput;
+            _user = await _chatApiService.UpdateUser(_user);
+        }
     }
 
     private string ColorMessage(MessageModel message)
@@ -128,6 +157,11 @@
             "Negative" => "message-negative",
             _ => ""
         };
+    }
+
+    private string MoveMessageToRight(MessageModel message)
+    {
+        return message.UserId == _user?.Id ? "own" : ""; 
     }
 
     public async ValueTask DisposeAsync()

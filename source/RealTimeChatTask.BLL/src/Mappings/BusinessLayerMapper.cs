@@ -12,11 +12,15 @@ public class BusinessLayerMapper : Profile
             .ReverseMap();
 
         CreateMap<Message, MessageDTO>()
-            .ForMember(dto => dto.Sentiment, c => c.MapFrom(entity => entity.Sentiment.SentimentResult));
+            .ForMember(dto => dto.Sentiment, c => c.MapFrom(entity => entity.Sentiment.SentimentResult))
+            .ForMember(dto => dto.UserName, c => c.MapFrom(entity => entity.User.UserName)); 
         
         CreateMap<MessageDTO, Message>();
         
         CreateMap<Sentiment, SentimentDTO>()
+            .ReverseMap();
+
+        CreateMap<User, UserDTO>()
             .ReverseMap();
     }
 }

@@ -7,6 +7,7 @@ public interface IUnitOfWork
     IChatRoomRepository ChatRoomRepository { get; }
     IMessageRepository MessageRepository { get; }
     ISentimentRepository SentimentRepository { get; }
+    IUserRepository UserRepository { get; }
     
     Task SaveAsync();
 }

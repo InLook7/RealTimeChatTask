@@ -11,6 +11,19 @@
     gap: 1rem;
 }
 
+.chat-username {
+    display: flex;
+    align-items: center;
+}
+
+.chat-username-field {
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #9f9f9f;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
 .chat-list {
     display: flex;
     flex-direction: column;
@@ -107,6 +120,11 @@
 
 .message-negative {
     background: linear-gradient(98.63deg, #fb5f33 0%, #faa124 100%);
+}
+
+.message-username {
+    font-size: 11px;
+    font-style: italic;
 }
 
 .message-content {

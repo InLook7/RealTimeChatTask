@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using RealTimeChatTask.BLL.Interfaces;
 using RealTimeChatTask.SharedModels.Models;
+using RealTimeChatTask.BLL.DTOs;
 
 namespace RealTimeChatTask.PL.Controllers;
 
@@ -9,14 +10,17 @@ namespace RealTimeChatTask.PL.Controllers;
 [Route("api/[controller]")]
 public class ChatController : ControllerBase
 {
+    private readonly IMapper _mapper;
     private readonly IChatRoomService _chatRoomService;
     private readonly IMessageService _messageService;
-    private readonly IMapper _mapper;
+    private readonly IUserService _userService;
 
-    public ChatController(IMapper mapper, IChatRoomService chatRoomService, IMessageService messageService)
+    public ChatController(IMapper mapper, IChatRoomService chatRoomService, 
+        IMessageService messageService, IUserService userService)
     {
         _chatRoomService = chatRoomService;
         _messageService = messageService;
+        _userService = userService;
         _mapper = mapper;
     }
 

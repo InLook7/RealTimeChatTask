@@ -20,6 +20,7 @@ builder.Services.AddSignalR();
 builder.Services.AddTransient<IChatRoomService, ChatRoomService>();
 builder.Services.AddTransient<IMessageService, MessageService>();
 builder.Services.AddTransient<ISentimentService, SentimentService>();
+builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITextAnalyticsService, TextAnalyticsService>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
