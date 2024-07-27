@@ -87,7 +87,6 @@
 }
 
 .chat-body-message {
-    background: linear-gradient(98.63deg, #faa124 0%, #fb5f33 100%);
     color: honeydew;
     padding: 0.7rem;
     border-radius: 1rem 1rem 1rem 0;
@@ -98,10 +97,29 @@
     gap: 0.5rem;
 }
 
+.message-positive {
+    background: linear-gradient(98.63deg, #56b409 0%, #93d022 100%);
+}
+
+.message-neutral {
+    background: linear-gradient(98.63deg, #318bf2 0%, #22e1ee 100%);
+}
+
+.message-negative {
+    background: linear-gradient(98.63deg, #fb5f33 0%, #faa124 100%);
+}
+
+.message-content {
+    font-weight: bold;
+}
+
+.message-date {
+    font-style: italic;
+}
+
 .own {
     align-self: flex-end;
     border-radius: 1rem 1rem 0 1rem;
-    background: linear-gradient(98.63deg, #22e1ee 0%, #318bf2 100%);
 }
 
 .chat-sender {

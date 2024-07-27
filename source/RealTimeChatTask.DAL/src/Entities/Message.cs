@@ -7,4 +7,5 @@ public class Message : BaseEntity
     public DateTime CreationDate { get; set; }
     
     public ChatRoom ChatRoom { get; set; }
+    public Sentiment Sentiment { get; set; }
 }

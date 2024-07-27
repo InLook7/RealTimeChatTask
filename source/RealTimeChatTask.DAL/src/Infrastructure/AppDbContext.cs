@@ -13,4 +13,5 @@ public class AppDbContext : DbContext
 
     public DbSet<ChatRoom> ChatRooms { get; set; }
     public DbSet<Message> Messages { get; set; }
+    public DbSet<Sentiment> Sentiments { get; set; }
 }

@@ -43,9 +43,9 @@
         <div class="chat-body">
             @foreach (var message in _messages)
             {
-                <div class="chat-body-message">
-                    <span>@message.Content</span>
-                    <span>@message.CreationDate.ToString("HH:mm")</span>
+                <div class="chat-body-message @ColorMessage(message)">
+                    <span class="message-content">@message.Content</span>
+                    <span class="message-date">@message.CreationDate.ToString("HH:mm")</span>
                 </div>
             }
         </div>
@@ -117,6 +117,17 @@
         await _chatHubService.SendMessageAsync(_chat, _message);
 
         _message.Content = string.Empty;
+    }
+
+    private string ColorMessage(MessageModel message)
+    {
+        return message.Sentiment switch
+        {
+            "Positive" => "message-positive",
+            "Neutral" => "message-neutral",
+            "Negative" => "message-negative",
+            _ => ""
+        };
     }
 
     public async ValueTask DisposeAsync()

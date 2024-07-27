@@ -1,3 +1,5 @@
+using Azure;
+using Azure.AI.TextAnalytics;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using RealTimeChatTask.PL.Hubs;
@@ -17,6 +19,8 @@ builder.Services.AddSignalR();
 
 builder.Services.AddTransient<IChatRoomService, ChatRoomService>();
 builder.Services.AddTransient<IMessageService, MessageService>();
+builder.Services.AddTransient<ISentimentService, SentimentService>();
+builder.Services.AddTransient<ITextAnalyticsService, TextAnalyticsService>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
@@ -28,6 +32,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IValidator<MessageDTO>, MessageValidator>();
 
 builder.Services.AddAutoMapper(typeof(BusinessLayerMapper), typeof(PresentationLayerMapper));
+
+builder.Services.AddSingleton(new TextAnalyticsClient(
+    new Uri("{hidden}"), 
+    new AzureKeyCredential("{hidden}")
+));
 
 var app = builder.Build();
 

@@ -15,4 +15,7 @@ public class MessageModel
 
     [JsonPropertyName("creationDate")]
     public DateTime CreationDate { get; set; }
+
+    [JsonPropertyName("sentiment")]
+    public string Sentiment { get; set; }
 }

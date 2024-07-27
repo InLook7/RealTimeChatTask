@@ -6,6 +6,7 @@ public interface IUnitOfWork
 {
     IChatRoomRepository ChatRoomRepository { get; }
     IMessageRepository MessageRepository { get; }
+    ISentimentRepository SentimentRepository { get; }
     
     Task SaveAsync();
 }

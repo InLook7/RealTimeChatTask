@@ -14,10 +14,12 @@ public class UnitOfWork : IUnitOfWork
         
         ChatRoomRepository = new ChatRoomRepository(appDbContext);
         MessageRepository = new MessageRepository(appDbContext);
+        SentimentRepository = new SentimentRepository(appDbContext);
     }
     
     public IChatRoomRepository ChatRoomRepository { get; }
     public IMessageRepository MessageRepository { get; }
+    public ISentimentRepository SentimentRepository { get; }
     
     public async Task SaveAsync()
     {

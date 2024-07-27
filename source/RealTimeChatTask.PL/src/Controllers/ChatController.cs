@@ -34,7 +34,7 @@ public class ChatController : ControllerBase
     [HttpGet("{roomId}/messages")]
     public async Task<ActionResult<IEnumerable<ChatRoomModel>>> GetMessagesByRoom(int roomId)
     {
-        var messages = await _messageService.GetByRoomIdAsync(roomId);
+        var messages = await _messageService.GetByRoomAsync(roomId);
         var messagesModels = _mapper.Map<IEnumerable<MessageModel>>(messages);
 
         return Ok(messagesModels);

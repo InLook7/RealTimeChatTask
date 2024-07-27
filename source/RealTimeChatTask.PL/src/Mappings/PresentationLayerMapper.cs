@@ -8,10 +8,10 @@ public class PresentationLayerMapper : Profile
 {
     public PresentationLayerMapper()
     {
-        CreateMap<ChatRoomModel, ChatRoomDTO>()
+        CreateMap<ChatRoomDTO, ChatRoomModel>()
             .ReverseMap();
 
-        CreateMap<MessageModel, MessageDTO>()
+        CreateMap<MessageDTO, MessageModel>()
             .ReverseMap();
     }
 }

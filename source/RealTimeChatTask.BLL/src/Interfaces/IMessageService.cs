@@ -4,5 +4,5 @@ namespace RealTimeChatTask.BLL.Interfaces;
 
 public interface IMessageService : ICrud<MessageDTO>
 {
-    Task<IEnumerable<MessageDTO>> GetByRoomIdAsync(int roomId);
+    Task<IEnumerable<MessageDTO>> GetByRoomAsync(int roomId);
 }

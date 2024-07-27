@@ -8,10 +8,15 @@ public class BusinessLayerMapper : Profile
 {
     public BusinessLayerMapper()
     {
-        CreateMap<ChatRoomDTO, ChatRoom>()
+        CreateMap<ChatRoom, ChatRoomDTO>()
             .ReverseMap();
 
-        CreateMap<MessageDTO, Message>()
+        CreateMap<Message, MessageDTO>()
+            .ForMember(dto => dto.Sentiment, c => c.MapFrom(entity => entity.Sentiment.SentimentResult));
+        
+        CreateMap<MessageDTO, Message>();
+        
+        CreateMap<Sentiment, SentimentDTO>()
             .ReverseMap();
     }
 }
