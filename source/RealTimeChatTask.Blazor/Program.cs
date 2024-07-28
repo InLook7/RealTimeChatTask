@@ -13,12 +13,12 @@ builder.Services.AddTransient<IChatApiService, ChatApiService>();
 
 builder.Services.AddSingleton(serviceProdiver => new HttpClient
 {
-    BaseAddress = builder.Configuration.GetValue<Uri>("AppBackendUrl"),
+    BaseAddress = builder.Configuration.GetValue<Uri>("AppBackendUrl")
 });
 
 builder.Services.AddScoped(serviceProvider =>
     new HubConnectionBuilder()
-        .WithUrl("http://localhost:12000/chat")
+        .WithUrl($"{builder.Configuration.GetValue<string>("AppBackendUrl")}/chat")
         .Build()
 );
 

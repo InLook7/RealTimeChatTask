@@ -27,7 +27,7 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
 {
-    options.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionString"));
+    options.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionStringDB"));
 });
 
 builder.Services.AddScoped<IValidator<MessageDTO>, MessageValidator>();
@@ -35,8 +35,8 @@ builder.Services.AddScoped<IValidator<MessageDTO>, MessageValidator>();
 builder.Services.AddAutoMapper(typeof(BusinessLayerMapper), typeof(PresentationLayerMapper));
 
 builder.Services.AddSingleton(new TextAnalyticsClient(
-    new Uri(builder.Configuration.GetValue<string>("TextAnalytics:Endpoint")), 
-    new AzureKeyCredential(builder.Configuration.GetValue<string>("TextAnalytics:ApiKey"))
+    new Uri(builder.Configuration.GetValue<string>("TextAnalyticsEndpoint")), 
+    new AzureKeyCredential(builder.Configuration.GetValue<string>("TextAnalyticsApiKey"))
 ));
 
 var app = builder.Build();
