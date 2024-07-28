@@ -4,11 +4,16 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RealTimeChatTask.BLL\RealTimeChatTask.BLL.csproj"/>
+    <ProjectReference Include="..\RealTimeChatTask.BLL\RealTimeChatTask.BLL.csproj" />
+    <ProjectReference Include="..\RealTimeChatTask.SharedModels\RealTimeChatTask.SharedModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.25.2" />
+    <PackageReference Include="Azure.AI.TextAnalytics" Version="5.3.0" />
   </ItemGroup>
 
 </Project>
