@@ -1,0 +1,49 @@
+﻿@page "/info"
+
+<h2>Real-time chat application</h2>
+
+<h3>Overview</h3>
+
+<img src="images/app.jpg" width="850" height="400"/>
+
+<p>Website offers chat rooms with various topics for communication, where users can connect. Users can remain anonymous or provide their nickname.</p>
+
+<ul>
+    <li>Green message - positive sentiment</li>
+    <li>Blue message - neutral sentiment</li>
+    <li>Orange message - negative sentiment</li>
+</ul>
+
+<h3>Application structure</h3>
+
+<ul>
+    <li>source:
+        <ul>
+            <li><strong>RealTimeChatTask.DAL</strong> - Data Access Layer. Implemented using <em>Generic Repository Pattern</em> and <em>Unit of Work</em>.</li>
+            <li><strong>RealTimeChatTask.BLL</strong> - Business Logic Layer. Contains the services with business logic, implements validation.</li>
+            <li><strong>RealTimeChatTask.PL</strong> - Presentation Layer. Contains endpoints for interaction with the client.</li>
+            <li><strong>RealTimeChatTask.Blazor</strong> - Website. Contains page components.</li>
+            <li><strong>RealTimeChatTask.SharedModels</strong> - Shared models for Blazor and Presentation Layer.</li>
+        </ul>
+    </li>
+    <li>tests:
+        <ul>
+            <li><strong>RealTimeChatTask.Tests</strong> - Unit tests.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Technology stack</h3>
+
+<ul>
+    <li>ASP.NET Core - for backend-side</li>
+    <li>EF Core - to interact with the database</li>
+    <li>AutoMapper - to automatically map entities, dto's and models.</li>
+    <li>FluentValidation - to implement validation</li>
+    <li>Azure.AI.TextAnalytics - to integrate sentiment analysis</li>
+    <li>Microsoft.Azure.SignalR - to interact with Azure SignalR Service.</li>
+    <li>Blazor - for client-side</li>
+    <li>Microsoft.AspNetCore.SignalR.Client - to interact with SignalR on the client side</li>
+    <li>SQL Server - application database</li>
+    <li>XUnit - to test application</li>
+</ul>

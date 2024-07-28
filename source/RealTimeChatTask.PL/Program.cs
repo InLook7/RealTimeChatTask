@@ -15,7 +15,7 @@ using RealTimeChatTask.BLL.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddSignalR();
+builder.Services.AddSignalR().AddAzureSignalR(builder.Configuration.GetValue<string>("ConnectionStringAzureSignalR"));
 
 builder.Services.AddTransient<IChatRoomService, ChatRoomService>();
 builder.Services.AddTransient<IMessageService, MessageService>();
