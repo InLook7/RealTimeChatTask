@@ -28,8 +28,10 @@ Website offers chat rooms with various topics for communication, where users can
 - AutoMapper - to automatically map entities, dto's and models.
 - FluentValidation - to implement validation
 - Azure.AI.TextAnalytics - to integrate sentiment analysis
-- Microsoft.Azure.SignalR - to interact with Azure SignalR Service. <p> $\\[0.3cm]$ </p> 
+- Microsoft.Azure.SignalR - to interact with Azure SignalR Service.
+
 - Blazor - for client-side
-- Microsoft.AspNetCore.SignalR.Client - to interact with SignalR on the client side <p> $\\[0.3cm]$ </p> 
-- SQL Server - application database <p> $\\[0.3cm]$ </p> 
+- Microsoft.AspNetCore.SignalR.Client - to interact with SignalR on the client side 
+
+- SQL Server - application database
 - XUnit - to test application
